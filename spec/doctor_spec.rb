@@ -1,5 +1,4 @@
-require('rspec')
-require('doctor')
+require('spec_helper')
 
 describe(Doctor) do
   describe(':specialty') do
