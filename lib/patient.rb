@@ -4,7 +4,7 @@ class Patient
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
     @birthdate = attributes.fetch(:birthdate)
-    @doctor = nil
+    @doctor_id = nil
     @id = nil
   end
 
@@ -28,5 +28,17 @@ class Patient
     patient = self.birthdate().eql?(another_patient.birthdate())
     patient_name = self.name().eql?(another_patient.name())
     patient.&(patient_name)
+  end
+
+  define_method(:assign_doctor) do |scrubs|
+    medic = scrubs.name
+    returned_results = DB.exec("SELECT id FROM doctors WHERE name = ('#{medic}');")
+    medic_ids = []
+    returned_results.each() do |id|
+      whatever = id.fetch("id")
+      medic_ids.push(whatever)
+    end
+    @doctor_id = medic_ids.first.to_i #grabs the first value in medic_id array and makes it an interger for @doctor_id
+    DB.exec("UPDATE patients SET doctor_id = ('#{@doctor_id}') WHERE name = ('#{self.name}');")
   end
 end

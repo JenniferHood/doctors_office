@@ -1,9 +1,10 @@
 class Doctor
-  attr_reader(:specialty, :name)
+  attr_reader(:specialty, :name, :id)
 
   define_method(:initialize) do |attributes|
     @specialty = attributes.fetch(:specialty)
     @name = attributes.fetch(:name)
+    @id =  nil
   end
 
   define_method(:save) do

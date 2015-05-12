@@ -29,4 +29,15 @@ describe(Patient) do
       expect(patient1).to(eq(patient2))
     end
   end
+
+  describe('assign_doctor') do
+    it('user assigns a doctor to a patient') do
+      test_patient = Patient.new({:name => "Warren", :birthdate => nil})
+      test_patient.save()
+      test_doctor = Doctor.new({:name => "Bill", :specialty => "neurology"})
+      test_doctor.save()
+      test_patient.assign_doctor(test_doctor)
+        expect(test_patient.doctor_id()).to(eq(test_doctor.id))
+     end
+   end
 end

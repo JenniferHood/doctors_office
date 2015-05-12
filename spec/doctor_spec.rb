@@ -29,5 +29,4 @@ describe(Doctor) do
       expect(doctor1).to(eq(doctor2))
     end
   end
-
 end
